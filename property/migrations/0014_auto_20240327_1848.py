@@ -8,7 +8,7 @@ def phone_parse(apps, schema_editor):
     flats = Flat.objects.all()
     for flat in flats:
         phone_number_parse = phonenumbers.parse(flat.owners_phonenumber, "RU")
-        if phonenumbers.is_valid_number(phone_number_parse):
+        if not phonenumbers.is_valid_number(phone_number_parse):
             phone_number = phonenumbers.format_number(phone_number_parse, phonenumbers.PhoneNumberFormat.E164)
             flat.owner_pure_phone = phone_number
             flat.save()
