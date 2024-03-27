@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-
+from django.contrib.auth.models import User
 
 class Flat(models.Model):
     owner = models.CharField('ФИО владельца', max_length=200)
@@ -48,13 +48,10 @@ class Flat(models.Model):
         blank=True,
         db_index=True)
 
+
     def __str__(self):
         return f'{self.town}, {self.address} ({self.price}р.)'
-
-# class New_building(models.Model):
-#     construction_year = models.IntegerField(
-#         'Год постройки здания',
-#         null=True,
-#         blank=True,
-#         db_index=True)
-#     new_building = models.BooleanField('Новостройка', null=True)
+class Complaint(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    flat = models.ForeignKey(Flat, on_delete=models.CASCADE)
+    complaint = models.TextField('Текст жалобы')
