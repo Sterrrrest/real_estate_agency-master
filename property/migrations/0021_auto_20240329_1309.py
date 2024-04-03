@@ -2,13 +2,6 @@
 
 from django.db import migrations
 
-def connect_owners_flat(apps, schema_editor):
-    Flat = apps.get_model('property', 'Flat')
-    Owner = apps.get_model('property', 'Owner')
-    flats = Flat.objects.all()
-    for flat in flats:
-        flat_owned = flat.flats.all()
-        flat.owned_by.set(flat_owned)
 
 class Migration(migrations.Migration):
 
@@ -17,5 +10,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RunPython(connect_owners_flat),
+
     ]

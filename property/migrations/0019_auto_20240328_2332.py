@@ -7,10 +7,7 @@ def connect_flat_owners(apps, schema_editor):
     Owner = apps.get_model('property', 'Owner')
     flats = Flat.objects.all()
     owners = Owner.objects.all()
-    for flat in flats:
-        Owner.objects.get_or_create(owner=flat.owner, owner_pure_phone=flat.owner_pure_phone,
-                                    owners_phonenumber=flat.owners_phonenumber)
-    for owner in owners:
+    for owner in owners.iterator():
         flat_owner = Flat.objects.filter(owner=owner.owner)
         owner.owner_flats.set(flat_owner)
 
