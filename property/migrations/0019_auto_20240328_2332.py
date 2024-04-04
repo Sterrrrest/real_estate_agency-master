@@ -5,9 +5,7 @@ from django.db import migrations
 def connect_flat_owners(apps, schema_editor):
     Flat = apps.get_model('property', 'Flat')
     Owner = apps.get_model('property', 'Owner')
-    flats = Flat.objects.all()
-    owners = Owner.objects.all()
-    for owner in owners.iterator():
+    for owner in Owner.objects.all().iterator():
         flat_owner = Flat.objects.filter(owner=owner.owner)
         owner.owner_flats.set(flat_owner)
 
