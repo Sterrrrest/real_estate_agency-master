@@ -51,6 +51,8 @@ class Flat(models.Model):
 
     def __str__(self):
         return f'{self.town}, {self.address} ({self.price}р.)'
+
+
 class Complaint(models.Model):
     user = models.ForeignKey(User, verbose_name='Пользователь', related_name='complainers', on_delete=models.CASCADE)
     flat = models.ForeignKey(Flat, verbose_name='Квартира', related_name='complained', on_delete=models.CASCADE)
@@ -58,6 +60,8 @@ class Complaint(models.Model):
 
     def __str__(self):
         return f'{self.flat}'
+
+
 class Owner(models.Model):
     name = models.CharField('ФИО владельца', max_length=200, db_index=True)
     pure_phone = PhoneNumberField(region='RU', verbose_name="Правильный формат", blank=True)
