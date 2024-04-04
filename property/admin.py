@@ -24,5 +24,5 @@ class ComplaintAdmin(admin.ModelAdmin):
 
 @admin.register(Owner)
 class OwnerAdmin(admin.ModelAdmin):
-    raw_id_fields = ('owner_flats',)
+    raw_id_fields = ('flat',)
 
